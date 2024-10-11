@@ -1,1 +1,1 @@
-FinanceMe- APP
+FinanceMe- APP Star Agile Project.
