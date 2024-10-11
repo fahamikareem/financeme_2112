@@ -11,8 +11,8 @@ provider "aws" {
   region = "us-east-1"
 }
 # Security Group to allow SSH, HTTP, and other ports
-resource "aws_security_group" "sg_financeme" {
-  name        = "sg_financeme"
+resource "aws_security_group" "sg_financeme01" {
+  name        = "sg_financeme01"
   description = "Allow SSH, HTTP, and range 8080-8099"
 
   # Allow SSH (port 22)
@@ -53,7 +53,7 @@ resource "aws_instance" "FinanceMe" {
   ami             = "ami-0a0e5d9c7acc336f1"
   instance_type = "t2.micro"
   key_name = "ansible_key"
-  vpc_security_group_ids = [aws_security_group.sg_financeme.id]
+  vpc_security_group_ids = [aws_security_group.sg_financeme01.id]
   tags = {
     Name = "FinanceMe"
   }
