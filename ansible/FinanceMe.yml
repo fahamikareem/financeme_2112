@@ -21,7 +21,7 @@
     - name: Deploy Docker container
       docker_container:
         name: finance_app
-        image: fahamie/finance-app
+        image: fahamie/financeme
         state: started
         restart_policy: always
         published_ports:
