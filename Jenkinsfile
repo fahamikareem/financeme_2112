@@ -44,7 +44,7 @@ pipeline {
         }
         stage ('Configure FinanceMe Server with Ansible Playbook') {
             steps {
-                sh 'ansible-playbook -i ansible/inventory_aws_ec2.yml -u ubuntu --private-key /var/lib/jenkins/ansible_key.pem ansible/FinanceMe.yml'
+                sh 'ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ansible/inventory_aws_ec2.yml -u ubuntu --private-key /var/lib/jenkins/ansible_key.pem ansible/FinanceMe.yml'
             }
         }
     }
