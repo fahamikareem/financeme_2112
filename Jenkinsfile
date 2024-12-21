@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'agent001'}
+    agent any
 
     parameters {
         string(name: 'WHOAMI', defaultValue: 'FahamiKareem', description: 'to capture the user')
