@@ -4,6 +4,7 @@ pipeline {
     parameters {
         string(name: 'WHOAMI', defaultValue: 'FahamiKareem', description: 'to capture the user')
         string(name: 'PROJECT', defaultValue: 'FinanceMe', description: 'Project Name')
+    }    
 
     
     stages {
