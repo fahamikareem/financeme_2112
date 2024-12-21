@@ -33,5 +33,15 @@ pipeline {
                 sh 'mvn package'
             }
         }
+
+        stage('input test') {
+            inout {
+                message "This message will be displayed: Hope this is fine"
+                ok "This is OK text"
+            }
+            steps {
+
+            }
+        }
     }
 }        
