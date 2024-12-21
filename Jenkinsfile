@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo 'Getting the code from Repository ${params.PROJECT} and the user is ${params.WHOAMI}'
+                echo "Getting the code from Repository ${params.PROJECT} and the user is ${params.WHOAMI}"
                 git 'https://github.com/fahamikareem/FinanceMe.git'
             }
         }
