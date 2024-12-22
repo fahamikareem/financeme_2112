@@ -4,7 +4,7 @@ pipeline {
     parameters {
         string(name: 'WHOAMI', defaultValue: 'FahamiKareem', description: 'User name')
         string(name: 'PROJECT', defaultValue: 'FinanceMe', description: 'Project name')
-        string(name: 'REPO_URL', defaultValue: 'https://github.com/fahamikareem/FinanceMe.git', description: 'Repository URL')
+        string(name: 'REPO_URL', defaultValue: 'https://github.com/fahamikareem/FinanceMe_2112.git', description: 'Repository URL')
     }
     
     environment{
