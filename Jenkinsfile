@@ -21,7 +21,7 @@ pipeline {
             }
         }
 
-        stage('Agent-Configuration') {
+        stage('Agent-Configuration and Compile') {
             steps {
                 sshagent(['SSHAgent01']) {
                     script {
@@ -38,7 +38,7 @@ pipeline {
                 sshagent(['SSHAgent01']) {
                     script {
                         echo "Building the code"
-                        sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'cd $PROJECT_DIRECTORY' && 'mvn compile'"
+                        sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'pwd' 'mvn compile' "
                     }
                 }
             }
