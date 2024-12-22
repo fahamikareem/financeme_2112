@@ -8,8 +8,8 @@ pipeline {
     }
     
     environment{
-        AGENT_USER='ec2-user'
-        AGENT_IP='54.167.114.220'
+        AGENT_USER='ubuntu'
+        AGENT_IP='44.211.167.77'
     }
 
     stages {
