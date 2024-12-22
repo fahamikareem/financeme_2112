@@ -24,8 +24,8 @@ pipeline {
             steps {
                 sshagent(['SSHAgent1']) {
                     echo "Copying configuration script to remote agent"
-                    sh "scp -o stricthostKeyChecking=no agent_config.sh ${AGENT_USER}@${AGENT_IP}:~"
-                    sh "ssh -o strictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'bash ~/agent_config.sh'"
+                    sh "scp -o StricthostKeyChecking=no agent_config.sh ${AGENT_USER}@${AGENT_IP}:~"
+                    sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'bash ~/agent_config.sh'"
                 }             
             }
         }
@@ -34,9 +34,7 @@ pipeline {
             steps {
                 sshagent(['SSHAgent1']) {
                 echo "Code Building"    
-                sh "ssh -o strictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP}
-                    mvn compile "
-                    
+                sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'mvn compile' "             
                 }
                 
             }
@@ -46,7 +44,7 @@ pipeline {
             steps {
                  sshagent(['SSHAgent1']) {
                  echo "Code Testing"    
-                 sh "ssh -o strictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP}
+                 sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP}
                      mvn test "
                     
                 }
@@ -58,8 +56,8 @@ pipeline {
              steps {
                  sshagent(['SSHAgent1']) {
                  echo "Code Testing"    
-                 sh "ssh -o strictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP}
-                     mvn package "  
+                 sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP}
+                     'mvn package' "  
                 }
             }
         }
