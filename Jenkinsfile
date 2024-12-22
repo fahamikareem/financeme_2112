@@ -24,7 +24,8 @@ pipeline {
             steps {
                 sshagent(['SSHAgent1']) {
                     echo "Copying configuration script to remote agent"
-                    sh "ssh -o strictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'pwd'"
+                    sh "scp -o stricthostKeyChecking=no ${AGENT_USER}@${AGENT_IP} agent_config.sh ~"
+                    sh "ssh -o strictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'bash ~/agent_config.sh'"
                 }             
             }
         }
