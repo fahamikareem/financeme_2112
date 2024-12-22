@@ -18,3 +18,4 @@ else
     git clone "$GIT_URL"
 fi
 mvn compile
+mvn test
