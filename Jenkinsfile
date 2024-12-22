@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    sshagent(['AgentSSH1']) 
 
     parameters {
         string(name: 'WHOAMI', defaultValue: 'FahamiKareem', description: 'to capture the user')
@@ -8,10 +8,17 @@ pipeline {
 
     
     stages {
+       
         stage('Checkout') {
-            steps {
+            steps {        
                 echo "Getting the code from Repository ${params.PROJECT} and the user is ${params.WHOAMI}"
                 git 'https://github.com/fahamikareem/FinanceMe.git'
+            }
+        }
+
+        stage('Agent Config') {
+            steps{
+                sh "scp -p StrictHostKeyChecking=No agent_config.sh"
             }
         }
     
@@ -34,14 +41,6 @@ pipeline {
             }
         }
 
-        stage('input test') {
-            inout {
-                message "This message will be displayed: Hope this is fine"
-                ok "This is OK text"
-            }
-            steps {
-
-            }
-        }
+       
     }
 }        
