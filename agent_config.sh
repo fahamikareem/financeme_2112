@@ -17,3 +17,5 @@ else
     echo "Directory $PROJECT_DIRECTORY does not exist. Cloning repository."
     git clone "$GIT_URL"
 fi
+
+mvn compile
