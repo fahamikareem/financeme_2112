@@ -4,7 +4,7 @@ pipeline {
     parameters {
         string(name: 'WHOAMI', defaultValue: 'FahamiKareem', description: 'User name')
         string(name: 'PROJECT', defaultValue: 'FinanceMe', description: 'Project name')
-        string(name: 'REPO_URL', defaultValue: 'https://github.com/fahamikareem/FinanceMe_2112.git', description: 'Repository URL')
+        string(name: 'GIT_URL', defaultValue: 'https://github.com/fahamikareem/FinanceMe_2112.git', description: 'Repository URL')
     }
     
     environment {
@@ -17,7 +17,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo "Getting the code from Repository ${params.PROJECT} for user ${params.WHOAMI}"
-                git "${params.REPO_URL}"
+                git "${params.GIT_URL}"
             }
         }
 
@@ -26,8 +26,8 @@ pipeline {
                 sshagent(['SSHAgent01']) {
                     script {
                         echo "Copying configuration script to remote agent"
-                        sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'git clone ${params.REPO_URL}' "
-                        sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'cd $PROJECT_DIRECTORY && bash agent_config.sh' "
+                        sh "scp -o StrictHostKeyChecking=no gent_config.sh ${AGENT_USER}@${AGENT_IP}:~ "
+                        sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP}  'bash agent_config.sh' "
                     }
                 }
             }
