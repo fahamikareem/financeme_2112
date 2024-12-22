@@ -19,3 +19,4 @@ else
 fi
 mvn compile
 mvn test
+mvn package

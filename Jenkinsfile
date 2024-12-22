@@ -21,40 +21,16 @@ pipeline {
             }
         }
 
-        stage('Agent-Configuration and Compile') {
+        stage('Agent-Configuration and Maven- Build Test Package') {
             steps {
                 sshagent(['SSHAgent01']) {
                     script {
-                        echo "Copying configuration script to remote agent"
+                        echo "Agent config and Executing Maven Compile, Test, Packaging"
                         sh "scp -o StrictHostKeyChecking=no agent_config.sh ${AGENT_USER}@${AGENT_IP}:~ "
                         sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP}  'bash agent_config.sh' "
                     }
                 }
             }
-        }
-
-  
-
-        stage('Test') {
-            steps {
-                sshagent(['SSHAgent01']) {
-                    script {
-                        echo "Testing the code"
-                        sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'cd $PROJECT_DIRECTORY' && 'mvn test'"
-                    }
-                }
-            }
-        }
-
-        stage('Package') {
-            steps {
-                sshagent(['SSHAgent01']) {
-                    script {
-                        echo "Packaging the code"
-                        sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'cd $PROJECT_DIRECTORY' && 'mvn package'"
-                    }
-                }
-            }
-        }
+        }     
     }
 }
