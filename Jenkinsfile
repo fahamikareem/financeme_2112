@@ -47,7 +47,7 @@ pipeline {
                  sshagent(['SSHAgent1']) {
                  echo "Code Testing"    
                  sh "ssh -o strictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP}
-                    mvn test "
+                     mvn test "
                     
                 }
                 
@@ -59,7 +59,7 @@ pipeline {
                  sshagent(['SSHAgent1']) {
                  echo "Code Testing"    
                  sh "ssh -o strictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP}
-                    mvn test "  
+                     mvn package "  
                 }
             }
         }
