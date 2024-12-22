@@ -32,22 +32,35 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo 'Compiling the code'
-                sh 'mvn compile'
+                sshagent(['SSHAgent1']) {
+                echo "Code Building"    
+                sh "ssh -o strictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP}
+                    mvn compile "
+                    
+                }
+                
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Testing the code using Maven'
-                sh 'mvn test'
+                 sshagent(['SSHAgent1']) {
+                 echo "Code Testing"    
+                 sh "ssh -o strictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP}
+                    mvn test "
+                    
+                }
+                
             }
         }
 
         stage('Package') {
-            steps {
-                echo 'Packaging the application - JAR'
-                sh 'mvn package'
+             steps {
+                 sshagent(['SSHAgent1']) {
+                 echo "Code Testing"    
+                 sh "ssh -o strictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP}
+                    mvn test "  
+                }
             }
         }
     }
