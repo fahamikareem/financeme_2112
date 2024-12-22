@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'WHOAMI', defaultValue: 'FahamiKareem', description: 'to capture the user')
+        string(name: 'PROJECT', defaultValue: 'FinanceMe', description: 'Project Name')
+        choice(name: "TestingPipeLineversions", choices: ['v1', 'V2', 'V3'])
+    }    
+
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                echo "Getting the code from Repository ${params.PROJECT} and the user is ${params.WHOAMI}"
+            }
+        }
+        stage('input testing') {
+            input {
+                message "This message will be displayed"
+                ok "This is ok block"
+            }
+            steps {
+                echo "inout block testing"
+            }
+                
+        }
+        stage('First echo stage'){
+            when {
+                ${params.PROJECT} 'FinanceMe'
+            }
+            steps {
+                echo "Congrats Fahami!!"
+            }
+        }
+           stage('Final echo stage'){
+            when {
+                ${params.PROJECT} 'FinanceMe'
+            }
+            steps {
+                echo "Congrats Fahami.........AGAIN!!!!!!"
+            }
+        }
+    } 
+}    
