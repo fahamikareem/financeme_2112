@@ -23,8 +23,7 @@ pipeline {
         stage('Agent Config') {
             steps {
                 echo "Copying configuration script to remote agent"
-                sh "pwd"
-                sh "scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/FinanceMe2212/agent_config.sh ${AGENT_USER}@${AGENT_IP}:/home/ubuntu"
+                sh "scp -o StrictHostKeyChecking=no agent_config.sh ${AGENT_USER}@${AGENT_IP}:/home/ubuntu"
                 sh "ssh -o strictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'bash /home/ubuntu/agent_config.sh"
             }
         }
