@@ -22,7 +22,7 @@ pipeline {
 
         stage('Agent-Configuration') {
             steps {
-                sshagent(['SSHAgent1']) {
+                sshagent(['SSHAgent01']) {
                     script {
                         echo "Copying configuration script to remote agent"
                         sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'git clone ${params.REPO_URL}' "
@@ -34,7 +34,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                sshagent(['SSHAgent1']) {
+                sshagent(['SSHAgent01']) {
                     script {
                         echo "Building the code"
                         sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'mvn compile'"
@@ -45,7 +45,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                sshagent(['SSHAgent1']) {
+                sshagent(['SSHAgent01']) {
                     script {
                         echo "Testing the code"
                         sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'mvn test'"
@@ -56,7 +56,7 @@ pipeline {
 
         stage('Package') {
             steps {
-                sshagent(['SSHAgent1']) {
+                sshagent(['SSHAgent01']) {
                     script {
                         echo "Packaging the code"
                         sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'mvn package'"
