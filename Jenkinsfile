@@ -26,7 +26,7 @@ pipeline {
                     script {
                         echo "Copying configuration script to remote agent"
                         sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'mkdir FinanceMe_2112' "
-                        sh "scp -o StrictHostKeyChecking=no . ${AGENT_USER}@${AGENT_IP}:~/FinanceMe_2112 "
+                        sh "scp -o StrictHostKeyChecking=no * ${AGENT_USER}@${AGENT_IP}:~/FinanceMe_2112 "
                         sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'cd FinanceMe_2112 && bash agent_config.sh' "
                     }
                 }
