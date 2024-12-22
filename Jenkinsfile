@@ -23,7 +23,7 @@ pipeline {
         stage('Agent Config') {
             steps {
                 echo "Copying configuration script to remote agent"
-                sh "scp -o StrictHostKeyChecking=no agent_config.sh ${AGENT_USER}@${AGENT_IP}:/home/ubuntu"
+                sh "scp -o StrictHostKeyChecking=no agent_config.sh ${AGENT_USER}@${AGENT_IP}:/home/ec2-user"
                 sh "ssh -o strictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'bash /home/ubuntu/agent_config.sh"
             }
         }
