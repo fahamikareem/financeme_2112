@@ -7,9 +7,9 @@ pipeline {
         string(name: 'REPO_URL', defaultValue: 'https://github.com/fahamikareem/FinanceMe_2112.git', description: 'Repository URL')
     }
     
-    environment{
-        AGENT_USER='ubuntu'
-        AGENT_IP='44.211.167.77'
+    environment {
+        AGENT_USER = 'ubuntu'
+        AGENT_IP = '44.211.167.77'
     }
 
     stages {
@@ -23,41 +23,44 @@ pipeline {
         stage('Agent-Configuration') {
             steps {
                 sshagent(['SSHAgent1']) {
-                    echo "Copying configuration script to remote agent"
-                    sh "scp -o StricthostKeyChecking=no agent_config.sh ${AGENT_USER}@${AGENT_IP}:~"
-                    sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'bash ~/agent_config.sh'"
-                }             
+                    script {
+                        echo "Copying configuration script to remote agent"
+                        sh "scp -o StrictHostKeyChecking=no agent_config.sh ${AGENT_USER}@${AGENT_IP}:~"
+                        sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'bash ~/agent_config.sh'"
+                    }
+                }
             }
         }
 
         stage('Build') {
             steps {
                 sshagent(['SSHAgent1']) {
-                echo "Code Building"    
-                sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'mvn compile' "             
+                    script {
+                        echo "Building the code"
+                        sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'mvn compile'"
+                    }
                 }
-                
             }
         }
 
         stage('Test') {
             steps {
-                 sshagent(['SSHAgent1']) {
-                 echo "Code Testing"    
-                 sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP}
-                     mvn test "
-                    
+                sshagent(['SSHAgent1']) {
+                    script {
+                        echo "Testing the code"
+                        sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'mvn test'"
+                    }
                 }
-                
             }
         }
 
         stage('Package') {
-             steps {
-                 sshagent(['SSHAgent1']) {
-                 echo "Code Testing"    
-                 sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP}
-                     'mvn package' "  
+            steps {
+                sshagent(['SSHAgent1']) {
+                    script {
+                        echo "Packaging the code"
+                        sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'mvn package'"
+                    }
                 }
             }
         }
