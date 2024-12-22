@@ -33,16 +33,7 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                sshagent(['SSHAgent01']) {
-                    script {
-                        echo "Building the code"
-                        sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'mvn -v' "
-                    }
-                }
-            }
-        }
+  
 
         stage('Test') {
             steps {
