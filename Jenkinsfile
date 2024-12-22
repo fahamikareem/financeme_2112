@@ -10,7 +10,7 @@ pipeline {
     environment {
         AGENT_USER = 'ubuntu'
         AGENT_IP = '44.211.167.77'
-        PROJECT_DIRECTORY= 'FinanceMe2112'
+        PROJECT_DIRECTORY= 'FinanceMe_2112'
     }
 
     stages {
