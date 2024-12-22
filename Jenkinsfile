@@ -10,6 +10,7 @@ pipeline {
     environment {
         AGENT_USER = 'ubuntu'
         AGENT_IP = '44.211.167.77'
+        PROJECT_DIRECTORY= 'FinanceMe2112'
     }
 
     stages {
@@ -26,7 +27,7 @@ pipeline {
                     script {
                         echo "Copying configuration script to remote agent"
                         sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'git clone ${params.REPO_URL}' "
-                        sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'cd FinanceMe_2112 && bash agent_config.sh' "
+                        sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'cd $PROJECT_DIRECTORY && bash agent_config.sh' "
                     }
                 }
             }
@@ -37,7 +38,7 @@ pipeline {
                 sshagent(['SSHAgent01']) {
                     script {
                         echo "Building the code"
-                        sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'mvn compile'"
+                        sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'cd $PROJECT_DIRECTORY' && 'mvn compile'"
                     }
                 }
             }
@@ -48,7 +49,7 @@ pipeline {
                 sshagent(['SSHAgent01']) {
                     script {
                         echo "Testing the code"
-                        sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'mvn test'"
+                        sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'cd $PROJECT_DIRECTORY' && 'mvn test'"
                     }
                 }
             }
@@ -59,7 +60,7 @@ pipeline {
                 sshagent(['SSHAgent01']) {
                     script {
                         echo "Packaging the code"
-                        sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'mvn package'"
+                        sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'cd $PROJECT_DIRECTORY' && 'mvn package'"
                     }
                 }
             }
