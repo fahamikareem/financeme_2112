@@ -11,7 +11,7 @@ pipeline {
         AGENT_USER = 'ubuntu'
         AGENT_IP = '44.211.167.77'
         PROJECT_DIRECTORY= 'FinanceMe_2112'
-        DOCKER_IMAGE= 'fahamiie/finme-25122024'
+        DOCKER_IMAGE= 'fahamie/finme-25122024'
     }
 
     stages {
