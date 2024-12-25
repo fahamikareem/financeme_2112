@@ -25,4 +25,4 @@ fi
 
 #Docker Steps
 sudo docker build -t $1:$2 ~/$PROJECT_DIRECTORY
-sudo docker run -itd  -p 8011:8081 $1:$2
+sudo docker run -itd  -p 8012:8081 $1:$2
