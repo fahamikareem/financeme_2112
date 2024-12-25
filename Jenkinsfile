@@ -38,9 +38,13 @@ pipeline {
             steps {
                 sshagent(['SSHAgent01']) {
                     script {
+                        withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'Password', usernameVariable: 'UserName')]) {
                         echo "Doockerizing the application"
                         sh "scp -o StrictHostKeyChecking=no docker_finme.sh ${AGENT_USER}@${AGENT_IP}:~ "
                         sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP}  'bash docker_finme.sh ${DOCKER_IMAGE} ${BUILD_NUMBER}' "
+                        sh "ssh ${AGENT_USER}@${AGENT_IP} sudo docker login -u ${UserName} -p ${password} "
+                        sh "ssh ${AGENT_USER}@${AGENT_IP} sudo docker push ${DOCKER_IMAGE}:${BUILD_NUMBER}"
+                        }
                     }
                 }
             }
