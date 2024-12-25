@@ -24,5 +24,5 @@ fi
 #mvn package
 
 #Docker Steps
-docker build -t $1:$2 ~/$PROJECT_DIRECTORY/Dockerfile
+sudo docker build -t $1:$2 ~/$PROJECT_DIRECTORY
 docker run -itd  -p 8011:8081 $1:$2
