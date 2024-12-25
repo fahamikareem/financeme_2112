@@ -40,7 +40,7 @@ pipeline {
                     script {
                         echo "Doockerizing the application"
                         sh "scp -o StrictHostKeyChecking=no docker_finme.sh ${AGENT_USER}@${AGENT_IP}:~ "
-                        sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'bash docker_finme.sh ${DOCKER_IMAGE} ${BUILD_NO}' "
+                        sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP} 'pwd' &&'bash docker_finme.sh ${DOCKER_IMAGE} ${BUILD_NO}' "
                     }
                 }
             }
