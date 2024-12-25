@@ -27,7 +27,7 @@ pipeline {
                 sshagent(['SSHAgent01']) {
                     script {
                         echo "Agent config and Executing Maven Compile, Test, Packaging"
-                        sh "scp -o StrictHostKeyChecking=no agent_config.sh ${AGENT_USER}@${AGENT_IP}:~ "
+                        sh "scp -o StrictHostKeyChecking=no docker_fineme.sh ${AGENT_USER}@${AGENT_IP}:~ "
                         sh "ssh -o StrictHostKeyChecking=no ${AGENT_USER}@${AGENT_IP}  'bash agent_config.sh' "
                     }
                 }
