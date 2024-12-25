@@ -19,6 +19,10 @@ else
     echo "Directory $PROJECT_DIRECTORY does not exist. Cloning repository."
     git clone "$GIT_URL"
 fi
-mvn compile
-mvn test
-mvn package
+#mvn compile
+#mvn test
+#mvn package
+
+#Docker Steps
+docker build -t $1:$2 ~/$PROJECT_DIRECTORY/dockerfile
+docker run -itd  -p 8011:8081 $1:$2
