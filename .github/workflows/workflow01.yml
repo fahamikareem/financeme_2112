@@ -5,6 +5,9 @@ jobs:
     job01:
         runs-on: ubuntu-latest
         steps:
+
+            - name: checkout
+              uses: actions/checkout@v4
             - name: welcome message
               run: echo "this is my first worlkflow"
 
