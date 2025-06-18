@@ -13,7 +13,7 @@ jobs:
                   echo "this is my first worlkflow"
                   ls
                   cat Dockerfile
-                  |
+                  
 
 
             # - name: list the file
