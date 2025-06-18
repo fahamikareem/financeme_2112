@@ -9,13 +9,18 @@ jobs:
             - name: checkout
               uses: actions/checkout@v4
             - name: welcome message
-              run: echo "this is my first worlkflow"
+              run: |
+                  echo "this is my first worlkflow"
+                  ls
+                  cat Dockerfile
+                  |
 
-            - name: list the file
-              run: ls
 
-            - name: read file
-              run: cat Dockerfile
+            # - name: list the file
+            #   run: ls
+
+            # - name: read file
+            #   run: cat Dockerfile
  
 
  
